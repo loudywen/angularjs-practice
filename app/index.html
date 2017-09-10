@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="controller/MainController.js"></script>
+    <script src="controller/todo.controller.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <!--<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>-->
+    <style>
+        .done {
+            background: green
+        }
+    </style>
+</head>
+<body class="container">
+
+<div class="row" ng-controller="TodoController as todo">
+    <div class="row ">
+        <div class="col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Input</div>
+                <div class="panel-body">
+                    <form ng-submit="todo.addToItemList();">
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <input type="text" class="form-control " placeholder="item" ng-model="todo.newTitle">
+                            </div>
+                            <div class="col-xs-6">
+                                <input type="checkbox" class="form-control" ng-model="todo.newCompleteStatus">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <button type="submit" class="btn btn-default">add</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class=" col-xs-12 col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">Item List</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="item in todo.list">
+
+                            {{item.title}} - index: {{$index}}
+                            <input type="checkbox" ng-model="item.completed">
+                            <a href="" ng-click="todo.addToItemAdded(item);">Add</a>
+                            <span class="badge">{{item.completed}}</span>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Item added</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="itemAdd in todo.itemAdd">
+                            {{itemAdd.title}}
+                            <a href="" ng-click="todo.removeFromItemAdded($index);">Remove</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+
+<!-- <script src="view1/view1.js"></script>
+ <script src="view2/view2.js"></script>
+ <script src="components/version/version.js"></script>
+ <script src="components/version/version-directive.js"></script>
+ <script src="components/version/interpolate-filter.js"></script>-->
+</body>
+</html>
