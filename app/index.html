@@ -31,6 +31,7 @@
             background: green
         }
     </style>
+    <script src="services/todo.service.js"></script>
 </head>
 <body class="container">
 
@@ -91,6 +92,24 @@
                 </div>
             </div>
 
+        </div>
+
+        <div class=" col-xs-12 ">
+            <div class="panel panel-default">
+                <div class="panel-heading">Http Practice</div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="itemFromHttp in todo.todoListFromHttp ">
+                            <div ng-dblclick="showEditField = true;" ng-hide="showEditField">{{itemFromHttp.title}}</div>
+
+                            <div ng-show= "showEditField">
+                                <input type="text" class="form-control" ng-model="itemFromHttp.title"
+                                       ng-blur="todo.updateTodo(itemFromHttp,$index);showEditField=false;">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

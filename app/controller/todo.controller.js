@@ -1,10 +1,11 @@
-function TodoController() {
+function TodoController(TodoService) {
+    var ctrl = this;
+    ctrl.newTitle = '';
+    ctrl.newCompleteStatus = false;
+    ctrl.itemAdd = [];
 
-    this.newTitle = '';
-    this.newCompleteStatus = false;
-    this.itemAdd = [];
-
-    this.list = [{
+    
+    ctrl.list = [{
         title: 'First todo item!',
         completed: false
     }, {
@@ -15,22 +16,36 @@ function TodoController() {
         completed: true
     }];
 
-    this.addToItemAdded = function (item) {
+    ctrl.todoListFromHttp = [];
 
-        this.itemAdd.push(item)
+     function getToDoFromHttp () {
+         TodoService.retrieve().then(function (response) {
+             ctrl.todoListFromHttp = response;
+         })
+    }
+    
+    ctrl.updateTodo = function updateToDoFromHttp(item,index) {
+        TodoService.update(item);
+    }
+    
+    ctrl.addToItemAdded = function (item) {
+
+        ctrl.itemAdd.push(item)
     }
 
-    this.removeFromItemAdded = function (index) {
-        this.itemAdd.splice(index, 1);
+    ctrl.removeFromItemAdded = function (index) {
+        ctrl.itemAdd.splice(index, 1);
 
     }
 
-    this.addToItemList = function () {
-        this.list.push({
-            title: this.newTitle,
-            completed:this.newCompleteStatus
+    ctrl.addToItemList = function () {
+        ctrl.list.push({
+            title: ctrl.newTitle,
+            completed: ctrl.newCompleteStatus
         })
     };
+
+    getToDoFromHttp();
 }
 
 angular.module('myApp').controller('TodoController', TodoController);
