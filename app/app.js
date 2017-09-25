@@ -11,5 +11,4 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
 
 */
 
-angular.module('myApp', []);
-
+angular.module('app', []);

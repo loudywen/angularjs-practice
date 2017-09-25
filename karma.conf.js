@@ -8,8 +8,8 @@ module.exports = function(config) {
       'bower_components/angular/angular.js',
       'bower_components/angular-route/angular-route.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'components/**/*.js',
-      'view*/**/*.js'
+      'test/test2.spec.js',
+      'controller/*.js',
     ],
 
     autoWatch: true,
@@ -17,18 +17,23 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     browsers: ['Chrome'],
-
+    port: 9882,
     plugins: [
-      'karma-chrome-launcher',
-      'karma-firefox-launcher',
-      'karma-jasmine',
-      'karma-junit-reporter'
+      require("karma-chrome-launcher"),
+      require("karma-junit-reporter"),
+			require("karma-jasmine"),
+			require("karma-spec-reporter")
     ],
-
+    browserConsoleLogOptions: {
+      level: 'log',
+      terminal: true
+    },
     junitReporter: {
       outputFile: 'test_out/unit.xml',
       suite: 'unit'
-    }
-
+    },
+    reporters: ['spec'],
+    singleRun: true
   });
 };
+

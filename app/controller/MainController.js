@@ -1,8 +1,8 @@
-function MainController() {
-   this.name = 'Diwen';
+// function MainController() {
+//    this.name = 'Diwen';
 
-}
+// }
 
 
 
-angular.module('myApp').controller('MainController',['$scope',MainController]);
+// angular.module('app').controller('MainController',['$scope',MainController]);
