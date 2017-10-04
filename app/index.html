@@ -30,12 +30,109 @@
         .done {
             background: green
         }
+
+        .tabs {
+            margin: 25px;
+            background: #fff;
+        }
+
+        .tabs__list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tabs__list li {
+            float: left;
+        }
+
+        .tabs__list li a {
+            color: #444;
+            display: block;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+
+        .tabs__content {
+            padding: 10px;
+        }
+
+        .parent {
+            border: 1px solid red;
+            padding: 25px;
+        }
+
+        .child {
+            border: 1px solid blue;
+            padding: 25px;
+        }
     </style>
     <script src="services/todo.service.js"></script>
+    <script src="component/stateless-component.js"></script>
+    <script src="component/stateful-component.js"></script>
+    <script src="component/tabs.js"></script>
+    <script src="component/tab.js"></script>
+    <script src="component/UserManager.js"></script>
+    <script src="controller/ContactController.js"></script>
 </head>
 <body class="container">
 
+<div class="row">
+    <div class="col-xs-12">
+        <div class="parent" ng-controller="ContactController as contact">
+            <a href="" ng-click="contact.logoutUser();">
+                Logout
+            </a>
+            <pre>{{ contact | json }}</pre>
+
+            <ul>
+                <li ng-repeat="item in contact.contacts">
+                    <p>Name: {{ item.name }}</p>
+                    <p>Email: {{ item.email }}</p>
+                </li>
+            </ul>
+            <user-manager></user-manager>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <stateful-component></stateful-component>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <counter count="0"></counter>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <tabs>
+            <tab label="Tab 1">
+                Tab 1 contents!
+            </tab>
+            <tab label="Tab 2">
+                Tab 2 contents!
+            </tab>
+            <tab label="Tab 3">
+                Tab 3 contents!
+            </tab>
+        </tabs>
+
+    </div>
+</div>
+
+
 <div class="row" ng-controller="TodoController as todo">
+
     <div class="row ">
         <div class="col-xs-12">
             <div class="panel panel-default">
@@ -100,9 +197,10 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="itemFromHttp in todo.todoListFromHttp ">
-                            <div ng-dblclick="showEditField = true;" ng-hide="showEditField">{{itemFromHttp.title}}</div>
+                            <div ng-dblclick="showEditField = true;" ng-hide="showEditField">{{itemFromHttp.title}}
+                            </div>
 
-                            <div ng-show= "showEditField">
+                            <div ng-show="showEditField">
                                 <input type="text" class="form-control" ng-model="itemFromHttp.title"
                                        ng-blur="todo.updateTodo(itemFromHttp,$index);showEditField=false;">
                             </div>
